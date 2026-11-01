@@ -61,6 +61,8 @@ Annotation lists use JSON Lines, with one keyframe per line:
 
 Frames within each video have consecutive numeric BMP filenames starting at `0.bmp`. The loader uses the current frame and its four preceding frames; at the start of a video, it repeats the first frame.
 
+Frame indices must match the benchmark annotations. If the original files start at `001.bmp`, prepare a separate zero-based copy with the corresponding benchmark labels; keep the original dataset unchanged.
+
 ```text
 datasets/
 ├── DAUB-H/train/data1/0.bmp
@@ -113,6 +115,10 @@ The prediction entry point uses a causal five-frame window and produces detectio
 ```bash
 python predict.py --weights weights/kfgmoe_epoch060_ema.pth --sequence /path/to/video/frames --domain DAUB-H --output runs/demo --device cuda
 ```
+
+![KFGMoE detection examples](assets/detection_examples.png)
+
+Examples from the released checkpoint on DAUB-H, IRDST-R and ITSDT-15K. Cyan boxes indicate ground truth and orange boxes indicate predictions with confidence at least 0.5. The lower row enlarges the first annotated target in each image. Sequence names and frame indices are shown in the figure.
 
 ### Smoke check
 
