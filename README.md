@@ -2,9 +2,7 @@
 
 **Keyframe-Guided Mixture of Experts for Multi-Domain Moving Infrared Small Target Detection**
 
-Jinwu Lyu, Wenhao Li and Luping Ji
-
-PyTorch implementation of KFGMoE.
+PyTorch implementation of KFGMoE. The manuscript is currently under review.
 
 ![KFGMoE architecture](assets/architecture.png)
 
