@@ -41,7 +41,7 @@ Annotation lists use JSON Lines, with one keyframe per line:
 {"path":"DAUB-H/train/data1/13.bmp","domain":1,"boxes":[]}
 ```
 
-`path` is relative to `--data-root`; boxes use `[x1, y1, x2, y2, 0]` in original-image pixels, or `[]` for an empty frame.
+`path` is relative to `--data-root`; boxes use `[x1, y1, x2, y2, 0]` in original-image pixels, or `[]` for an empty frame. Training requires integer box coordinates.
 
 | Dataset | Domain ID |
 |---|---:|
