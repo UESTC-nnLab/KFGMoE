@@ -14,8 +14,14 @@ KFGMoE uses the current keyframe to guide expert selection and historical featur
 
 ## Prerequisite
 
-- Python 3.10
-- PyTorch 2.9 and torchvision 0.24
+- Python 3.10.18
+- PyTorch 2.9.0+cu128
+- torchvision 0.24.0+cu128
+- NumPy 2.1.3
+- Pillow 11.1.0
+- pycocotools 2.0.10
+- tqdm 4.67.3
+- Tested on Windows 11 with CUDA 12.8 and one NVIDIA GeForce RTX 4060 Laptop GPU (8 GB).
 
 Install PyTorch and torchvision for your CUDA environment, then install the remaining dependencies:
 
