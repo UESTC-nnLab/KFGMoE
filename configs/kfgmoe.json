@@ -1,0 +1,78 @@
+{
+  "seed": 3047,
+  "model": {
+    "frames": 5,
+    "experts": 6,
+    "top_k": 2
+  },
+  "method": {
+    "response_hidden": 32,
+    "routing_hidden": 32,
+    "descriptor": "predicted_weighted_mean_minus_global_mean",
+    "pool_epsilon": 1e-06,
+    "residual_bound": 0.5,
+    "auxiliary_weight": 0.1,
+    "mask": "keyframe_box_cell_overlap",
+    "response_loss": "per_image_balanced_bce",
+    "routing_scope": "keyframe_only",
+    "zero_initialize_residual_output": true
+  },
+  "domain_ids": {
+    "DAUB-H": 1,
+    "IRDST-R": 2,
+    "ITSDT-15K": 3
+  },
+  "upstream": {
+    "root": "third_party/CoMoE",
+    "url": "https://github.com/UESTC-nnLab/CoMoE",
+    "commit": "bef403e0ee2db33f98675dee080eccc68986ccc8",
+    "files": {
+      "nets/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "nets/darknet.py": "7d70e6add094a85fd214737be44df9ea7c6e73e7b573b5b9a3bdd87ad7756b8a",
+      "nets/mix_fix1.py": "9c514843ceff244b417e08a5c34198dc8a9da8584a1b89e63c5fd8305f6310df",
+      "nets/slowfastnet.py": "54d14809d6f9311a0b6339209e5885ef6b874d7191b712b45c380d9241c1dddd",
+      "nets/yolo_training.py": "24c6f8f3734c23786550dff69f6f50b6945115fa3e0ae5c4c1904e70f5cb260a",
+      "utils/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utils/utils.py": "6b91fe183b0be4def4e58bc75f8a9bc16b1cf64d7c69ba981b8f883ccfb7204e"
+    }
+  },
+  "initialization": {
+    "sha256": "2b891dbd626e5ba4e5eabcac84072268e2855f75165812d56f6126f3a8d5f66e"
+  },
+  "training": {
+    "epochs": 100,
+    "batch_size": 4,
+    "workers": 4,
+    "input_size": 512,
+    "native_epoch_divisor": 5,
+    "initial_lr_fit": 0.000625,
+    "minimum_lr_fit": 6.25e-06,
+    "momentum": 0.937,
+    "nesterov": true,
+    "weight_decay": 0.0005,
+    "gradient_clip_norm": 1.0,
+    "stop_epoch": 60
+  },
+  "prediction": {
+    "geometry": "stretch",
+    "input_size": 512,
+    "precision": "fp32",
+    "batch_size": 1,
+    "online_updates": 0,
+    "native_usage_buffer_updates": true
+  },
+  "scoring": {
+    "score_floor": 0.001,
+    "nms_iou": 0.65,
+    "max_detections": 100,
+    "operating_threshold": 0.5,
+    "matching_iou": 0.5
+  },
+  "checkpoint": {
+    "filename": "kfgmoe_epoch060_ema.pth",
+    "epoch": 60,
+    "ema_updates": 91080,
+    "sha256": "f54c475b6d9644a782f96d00bef9fa219b3840855cb3dc8f47c18d82442cc2e8",
+    "bytes": 86857987
+  }
+}
