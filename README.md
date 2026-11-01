@@ -8,7 +8,7 @@ PyTorch implementation of KFGMoE. The manuscript is currently under review.
 
 ## Introduction
 
-KFGMoE uses the current keyframe to guide expert selection and historical feature construction for multi-domain moving infrared small target detection. It combines **prototype-guided keyframe enhancement**, **MoE-based feature construction** and **spatio-temporal feature refinement** in one jointly trained model. Spatial supervision connects detection-relevant keyframe regions to expert allocation, and temporal fusion combines the resulting features for current-frame detection.
+KFGMoE is a multi-domain moving infrared small target detection framework in which the current keyframe guides expert selection and historical feature construction. It combines **prototype-guided keyframe enhancement**, **MoE-based feature construction** and **spatio-temporal feature refinement** in one jointly trained model. Spatial supervision connects detection-relevant keyframe regions to expert allocation, and temporal fusion combines the resulting features for current-frame detection.
 
 ## Prerequisite
 
@@ -28,11 +28,11 @@ python -m pip install -r requirements.txt
 python tools/prepare_upstream.py
 ```
 
-The second command prepares the CoMoE dependency; see [THIRD_PARTY.md](THIRD_PARTY.md).
+The second command prepares the required third-party modules; see [THIRD_PARTY.md](THIRD_PARTY.md) for details.
 
 ## Datasets
 
-Download the bounding-box versions of **DAUB-H**, **IRDST-R** and **ITSDT-15K** from the [CoMoE benchmark](https://github.com/UESTC-nnLab/CoMoE#datasets-bounding-box-based).
+Download the bounding-box versions of **DAUB-H**, **IRDST-R** and **ITSDT-15K** from the [dataset download page](https://github.com/UESTC-nnLab/CoMoE#datasets-bounding-box-based).
 
 Annotation lists use JSON Lines, with one keyframe per line:
 
@@ -51,7 +51,7 @@ Annotation lists use JSON Lines, with one keyframe per line:
 
 Each video must contain consecutive BMP frames starting at `0.bmp`, with indices matching the annotations. For one-based originals such as `001.bmp`, prepare a separate zero-based copy aligned with the benchmark labels.
 
-Convert an existing CoMoE-style annotation file (`image_path x1,y1,x2,y2,0 ...`) with:
+Convert an existing plain-text annotation file (`image_path x1,y1,x2,y2,0 ...`) with:
 
 ```bash
 python tools/prepare_annotations.py --input original_train.txt --output annotations/train.jsonl --data-root /path/to/datasets
@@ -63,7 +63,7 @@ Repeat for `test.jsonl`. Use `--strip-prefix /old/dataset/root` for old absolute
 
 ### Train
 
-Save the [CoMoE initialization weights](https://github.com/UESTC-nnLab/CoMoE/blob/bef403e0ee2db33f98675dee080eccc68986ccc8/model_data/pretrain.pth) as `weights/pretrained.pth`:
+Save the [pretrained initialization weights](https://github.com/UESTC-nnLab/CoMoE/blob/bef403e0ee2db33f98675dee080eccc68986ccc8/model_data/pretrain.pth) as `weights/pretrained.pth`:
 
 ```bash
 python train.py --config configs/kfgmoe.json --train-list annotations/train.jsonl --data-root /path/to/datasets --initial-weights weights/pretrained.pth --output outputs/kfgmoe
@@ -106,7 +106,7 @@ At IoU 0.5, Rc is maximum recall, Pr is mean interpolated precision over that re
 
 ## Acknowledgements
 
-Our implementation builds on [CoMoE](https://github.com/UESTC-nnLab/CoMoE). We thank its authors and the dataset providers. See [THIRD_PARTY.md](THIRD_PARTY.md) for attribution.
+We thank the [CoMoE](https://github.com/UESTC-nnLab/CoMoE) authors and dataset providers for sharing code, pretrained weights and data. See [THIRD_PARTY.md](THIRD_PARTY.md) for implementation sources.
 
 ## Contact
 
