@@ -19,7 +19,7 @@ KFGMoE is a multi-domain moving infrared small target detection framework in whi
 - Pillow 11.1.0
 - pycocotools 2.0.10
 - tqdm 4.67.3
-- Tested on Ubuntu 22.04.5 with CUDA 12.8 and one NVIDIA GeForce RTX 5090 (32 GB).
+- Tested on Ubuntu 22.04.5 with CUDA 12.8 and one NVIDIA GeForce RTX 4090 (24 GB).
 
 Install PyTorch and torchvision for your CUDA environment, then install the remaining dependencies:
 
